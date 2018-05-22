@@ -6,12 +6,14 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -31,6 +33,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
  */
 
 @RestController
+@Configuration
+@EnableWebMvc
 public class ProcController {
 
     private final Logger logger = Logger.getLogger(getClass());
@@ -159,7 +163,7 @@ public class ProcController {
                     }
                     buffer.close();
                     String status = getStatus(bs.toString());
-                    logger.info(status);
+                    //logger.info(status);
                     if (status != null && status.equals("UP"))
                         return list.get(i).getUri().toString();
                 }
